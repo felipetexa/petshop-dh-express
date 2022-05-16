@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const petsRouter = require('./routes/petRouter');
-const productRouter = require('./routes/productRouter')
+const serviceRouter = require('./routes/serviceRouter')
 
 app.use(petsRouter);
-app.use(productRouter);
+app.use(serviceRouter);
 
 app.get('/', (req, res) => {
   res.send('Olá mundo');
