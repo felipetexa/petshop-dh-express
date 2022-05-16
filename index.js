@@ -1,15 +1,11 @@
 const express = require('express');
 const app = express();
 const petsRouter = require('./routes/petRouter');
-const serviceRouter = require('./routes/serviceRouter')
+const serviceRouter = require('./routes/serviceRouter');
+const homeRouter = require(`./routes/homeRouter`)
 
+app.use(homeRouter);
 app.use(petsRouter);
 app.use(serviceRouter);
-
-app.get('/', (req, res) => {
-  res.send('Olá mundo');
-})
-
-
 
 app.listen(3000, () => console.log('Rodando...'))

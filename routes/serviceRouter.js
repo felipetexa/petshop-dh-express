@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const serviceController = require('../controllers/serviceController')
 
-router.get('/services', (req, res) => res.send('Lista de serviços'))
-router.get('/services/:id', (req, res) => res.send('Detalhes do serviço: ' + req.params.id))
-router.post('/services', (req, res) => res.send('Cadastro de serviço'))
-router.put('/services/:id', (req, res) => res.send('Atualização de serviço: ' + req.params.id))
-router.delete('/services/:id', (req, res) => res.send('Exclusão de serviço: ' + req.params.id))
+router.get('/services', serviceController.index)
+router.get('/services/:id', serviceController.show)
+router.post('/services', serviceController.create)
+router.put('/services/:id', serviceController.update)
+router.delete('/services/:id', serviceController.destroy)
 
 module.exports = router;
