@@ -1,6 +1,7 @@
 const homeController = {
   index: (req, res) => {
-    res.send('Olá mundo');
+    const title = 'Minha primeira aplicação com EJS'
+    res.render('home', {title}); //nao precisa passar a extensão .ejs
   }
 };
 
