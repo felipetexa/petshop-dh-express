@@ -1,8 +1,8 @@
-const db = require('../db.json')
+const Servico = require('../models/servico');
 
 const serviceController = {
   index: (req, res) => {  
-    const servicos = db.servicos;
+    const servicos = Servico.findAll();
     res.render('servicos', { servicos })
   }
 };
