@@ -1,11 +1,25 @@
+const Servico = require('../models/servico')
+
 const homeController = {
   index: (req, res) => {
-    // const title = 'Minha primeira aplicação com EJS'
-    res.render('index'); //nao precisa passar a extensão .ejs
+    return res.render('index'); //nao precisa passar a extensão .ejs
+  },
+  about: (req, res) => {
+    return res.render('about');
+  },
+  services: (req, res) => {
+    const servicos = Servico.findAll();
+    return res.render('servicos', { servicos });  
+  },
+  login: (req, res) => {
+    return res.render('login');
+  },
+  contact: (req, res) => {
+    return res.render('contato');
+  },
+  signUp: (req, res) => {
+    return res.render('cadastro');
   }
 };
-
-//posso fazer tudo num controler só... basta criar novos métodos dentro do objeto
-//dai fica tudo numa rota só também
 
 module.exports = homeController;
