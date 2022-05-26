@@ -1,6 +1,6 @@
 //responsável por realizar as operações de CRUD no banco de dados
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const { v4: geradorDeId } = require('uuid');
 
 //tratar caso o arquivo não exista
 function open() {
@@ -26,8 +26,9 @@ const Servico = {
   },
   save: (servico) => {
     const db = open();
-    db.servicos.push(servico);
-    store(db);
+        servico.id = geradorDeId(servico); // gerando um id para meu novo serviço
+        db.servicos.push(servico);
+        store(db);
   },
   update: (id, servicoAtualizado) => {
     const db = open();

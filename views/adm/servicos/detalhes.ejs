@@ -1,0 +1,29 @@
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+  crossorigin="anonymous"
+/>
+
+<%- include('../../partials/header') %>
+
+<main>
+  <section class="servicos-lista">
+    <div class="container">
+        <h1>Detalhes do Serviço</h1>
+        <a class="btn btn-primary mb-5" href="/adm/servicos">Listar Serviços</a>
+        <article>
+            <img class="thumb" src="<%= servico.imagem %>">
+            <div class="info">
+                <h2><%= servico.nome %></h2>
+                <p><%= servico.preco %></p>
+                <p><%= servico.descricao %></p>
+                <a href="#" class="btn btn-primary" <%= servico.ativo ? '' : 'style=background:red' %> >agendar</a>
+            </div>
+          </article>
+        
+    </div>
+</section>
+</main>
+
+<%- include('../../partials/footer') %>

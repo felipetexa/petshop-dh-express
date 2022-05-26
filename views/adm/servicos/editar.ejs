@@ -10,24 +10,24 @@
 <main>
   <section class="servicos-lista">
     <div class="container">
-      <h1>Cadastro de Serviços</h1>
+      <h1>Atualização de Serviços</h1>
 
       <a class="btn btn-primary mb-5" href="/adm/servicos">Listar Serviços</a>
-      <form method="POST" action="/adm/servicos">
+      <form method="POST" action="/adm/servicos/<%= servico.id %>?_method=PUT">
         <div class="mb-3">
           <label for="" class="form-label">Nome</label>
-          <input type="text" name="nome" class="form-control" id="" />
+          <input type="text" name="nome" value="<%= servico.nome %>" class="form-control" id="" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Imagem</label>
-          <input type="file" name="imagem" class="form-control" id="" />
+          <input type="text" name="imagem" value="<%= servico.imagem %>"class="form-control" id="" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Preço</label>
-          <input type="text" name="preço" class="form-control" id="" />
+          <input type="text" name="preço" value="<%= servico.preco %>"class="form-control" id="" />
         </div>
         <div class="mb-3 form-check">
-          <input name="ativo" type="checkbox" class="form-check-input"id="exampleCheck1"/>
+          <input name="ativo" <%= servico.ativo ? "checked" : ''%> type="checkbox" class="form-check-input"id="exampleCheck1"/>
           <label class="form-check-label" for="exampleCheck1">Ativo</label>
         </div>
         <div class="mb-3">
@@ -38,7 +38,7 @@
             cols="30"
             rows="10"
             placeholder="Descrição do Serviço"
-          ></textarea>
+          ><%= servico.descricao %></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
