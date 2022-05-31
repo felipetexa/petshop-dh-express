@@ -13,18 +13,18 @@
       <h1>Cadastro de Serviços</h1>
 
       <a class="btn btn-primary mb-5" href="/adm/servicos">Listar Serviços</a>
-      <form method="POST" action="/adm/servicos">
+      <form method="POST" action="/adm/servicos" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="" class="form-label">Nome</label>
           <input type="text" name="nome" class="form-control" id="" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Imagem</label>
-          <input type="file" name="imagem" class="form-control" id="" />
+          <input type="file" name="avatar" class="form-control" id="" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Preço</label>
-          <input type="text" name="preço" class="form-control" id="" />
+          <input type="text" name="preco" class="form-control" id="" />
         </div>
         <div class="mb-3 form-check">
           <input name="ativo" type="checkbox" class="form-check-input"id="exampleCheck1"/>

@@ -15,4 +15,8 @@ app.use(homeRouter)
 app.use(petsRouter)
 app.use(serviceRouter)
 
+app.use((req, res, next) => {
+  return res.status(404).render('not-found', {error: 'Página não encontrada'})
+})
+
 app.listen(3000, () => console.log('Rodando...'))
