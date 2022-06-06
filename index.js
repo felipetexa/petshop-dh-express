@@ -4,12 +4,15 @@ const app = express()
 const petsRouter = require('./routes/petRouter')
 const serviceRouter = require('./routes/serviceRouter')
 const homeRouter = require(`./routes/homeRouter`)
+const requisicoesLog = require('./middlewares/requisicoesLog')
 
 app.set('view engine', 'ejs')
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+app.use(requisicoesLog);
 
 app.use(homeRouter)
 app.use(petsRouter)
