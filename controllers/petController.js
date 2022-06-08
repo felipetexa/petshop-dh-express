@@ -1,17 +1,69 @@
+const Pet = require('../models/pet');
+const storage = require('../config/storage');
+const fs = require('fs');
+
+const uploadPet = storage('avatarPet', '/pets');
+
 const petController = {
-  index: (req, res) => {
-    res.send('Lista de pets');
-  },
-  create: (req, res) => res.send('Cadastro de pet'),
-  show: (req, res) => res.send('Detalhes do pet: ' + req.params.id),
-  update: (req, res) => res.send('Atualização de pet: ' + req.params.id),
-  destroy: (req, res) => res.send('Exclusão de pet: ' + req.params.id)
+    // Mostrar a página inicial de pets
+    index: (req, res) => {
+        const pets = Pet.findAll();
+        res.render('adm/pets', {pets});
+    },
+
+    //Mostrar a página para cadastar um pet
+    create: (req, res) => {
+        res.render("adm/pets/cadastro")
+    },
+
+    //Realiza o cadastro de um novo pet no banco de dados
+    store: (req, res) => {
+       uploadPet(req, res, (err) => {
+           const { nome, especie } = req.body;
+           const pet = {
+               imagem: '/img/pets/' + req.file.filename,
+               nome,
+               especie
+           };
+           Pet.save(pet);
+           return res.redirect('/adm/pets');
+       })
+    },
+    
+    //Exibe a página de detalhes de um pet
+    show: (req, res) => {
+        const {id} = req.params;
+        const pet = Pet.findById(id);
+        res.render("adm/pets/detalhes", {pet});
+    },
+
+    //Exibe a página para editar os dados do Pet
+    edit: (req, res) => {
+        const {id} = req.params;
+        const pet = Pet.findById(id);
+        res.render("adm/pets/editar", {pet});
+    },
+
+    //Atualiza os dados do pet no banco de dados
+    update: (req, res) => {
+        res.send('Atualizar pet');
+    },
+
+    //Exclui um pet do banco de dados
+    destroy: (req, res) => {
+        const {id} = req.params;
+        let pet = Pet.findById(id);
+
+        if(!pet) return res.status(404).render('errors', {error: "Pet não encontrado"});
+
+        Pet.delete(id);
+        try {
+            fs.unlinkSync('./public' + pet.imagem);
+        }catch (error){
+            console.log(error);
+        }
+        res.redirect('/adm/pets');
+    }
 }
 
 module.exports = petController;
-
-//index é tudo que for de listar
-//criar é create
-//detalhar é show
-//atualizar é update
-//deletar é destroy
