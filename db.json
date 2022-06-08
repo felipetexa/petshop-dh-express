@@ -56,6 +56,12 @@
       "nome": "Shanks",
       "email": "shanks@mail.com",
       "senha": "123456"
+    },
+    {
+      "id": "87c725ea-3393-47a6-bae1-fd94b41d5ed0",
+      "nome": "Felipe",
+      "email": "felipe@mail.com",
+      "senha": "123214123"
     }
   ]
 }
