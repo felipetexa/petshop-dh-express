@@ -8,8 +8,17 @@ const validacaoRegistroUsuario = [
         .notEmpty().withMessage("Deve preencher o email").bail()
         .isEmail().withMessage("Deve ser um email válido"),
     body("senha")
-        .notEmpty().withMessage("Deve preencher a senha").bail(),
+        .notEmpty().withMessage("Deve preencher a senha").bail()
+        .isLength({min: 3}).withMessage('A senha deve ter, no mínimo, 3 caracteres'),
+    body('confirmacaoSenha').custom((value, { req }) => {
+        if (value !== req.body.senha) {
+          throw new Error('As senhas não conferem');
+        }
         
+        return true;
+      })
 ]
+
+// sempre que quero validar algo, ver o atributo name no formulario
 
 module.exports = validacaoRegistroUsuario;

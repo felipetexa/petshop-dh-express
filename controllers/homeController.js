@@ -25,7 +25,6 @@ const homeController = {
   },
   store: (req, res) => {
     let errors = validationResult(req);
-    console.log(errors);
 
     if(errors.isEmpty()) {
         let content = fs.readFileSync("./db.json", "utf8");
