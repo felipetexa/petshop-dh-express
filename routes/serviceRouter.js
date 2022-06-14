@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const serviceController = require('../controllers/serviceController');
+const verificaSeLogado = require('../middlewares/verificaSeLogado');
+
+router.use(verificaSeLogado);
 
 router.get('/adm/servicos', serviceController.index);
 router.get('/adm/servicos/cadastro', serviceController.create);

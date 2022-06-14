@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const petController = require('../controllers/petController');
+const verificaSeLogado = require('../middlewares/verificaSeLogado');
+
+router.use(verificaSeLogado);
 
 //Mostra a página inicial dos pets
 router.get('/adm/pets', petController.index);
@@ -15,10 +18,10 @@ router.post('/adm/pets', petController.store);
 router.get('/adm/pets/:id', petController.show);
 
 //Mostra a página para atualizar dados de um pet
-router.get('/adm/pets/:id/editar',petController.edit);
+router.get('/adm/pets/:id/editar', petController.edit);
 
 //Atualiza os dados do pet selecionado no banco de dados
-router.put('/adm/pets/:id',petController.update);
+router.put('/adm/pets/:id', petController.update);
 
 //Deleta um pet do banco de dados
 router.delete('/adm/pets/:id', petController.destroy);

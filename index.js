@@ -5,6 +5,7 @@ const petsRouter = require('./routes/petRouter')
 const serviceRouter = require('./routes/serviceRouter')
 const homeRouter = require(`./routes/homeRouter`)
 const requisicoesLog = require('./middlewares/requisicoesLog')
+const session = require('express-session');
 
 app.set('view engine', 'ejs')
 app.use(methodOverride('_method'))
@@ -12,6 +13,11 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
+app.use(session({
+    secret: 'minha primeira session',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(requisicoesLog);
 
 app.use(homeRouter)

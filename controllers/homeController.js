@@ -3,6 +3,8 @@ const fs = require('fs');
 const { v4: geradorDeId } = require('uuid');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const session = require('express-session');
+const Pet = require('../models/pet');
 
 const homeController = {
   index: (req, res) => {
@@ -32,7 +34,7 @@ const homeController = {
     if(!usuario || !bcrypt.compareSync(senha, usuario.senha)) {
       return res.render('home/login', {error: 'Email ou senha incorretos ou não encontrados'});
     }
-
+    req.session.usuario = usuario;
     res.redirect('/adm');
     
   },
@@ -69,6 +71,14 @@ const homeController = {
 },
   showAdm: (req, res) => {
     return res.render('adm/index');
+  },
+  logout: (req, res) => {
+    req.session.destroy(function(err){console.log(err)});
+    res.redirect('/login');
+  },
+  pets: (req, res) => {
+    const pets = Pet.findAll();
+    res.render('home/pets', { pets });
   }
 };
 
